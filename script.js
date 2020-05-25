@@ -96,10 +96,10 @@ class Calculator {
       return;
     }
     let i = this.bits.length
-    console.log(intnumber);
+    // console.log(intnumber);
     while(intnumber !== 0){
       this.bits[i - 1].innerText = (intnumber % 2).toString();
-      console.log(intnumber)
+      // console.log(intnumber)
       intnumber = Math.floor(intnumber / 2);
       i = i - 1;
     }
@@ -110,14 +110,14 @@ class Calculator {
     for(let i = this.bits.length - 1; i >= 0 ; i--){
       number = number + parseInt(this.bits[i].innerText)*Math.pow(2,this.bits.length - i - 1);
     }
-    console.log(number);
+    // console.log(number);
     this.currentOperand = number.toString()
   }
 
   flipbit(i){
-    console.log(i);
+    // console.log(i);
     let ithnumber = parseInt(this.bits[i].innerText);
-    console.log(ithnumber);
+    // console.log(ithnumber);
     if(ithnumber === 1){
       this.bits[i].innerText = '0';
     } else {
@@ -128,7 +128,7 @@ class Calculator {
 
   updateCurrentOperand(){
     let displaynumber = this.currentOperandTextElement.innerText
-    console.log(displaynumber)
+    // console.log(displaynumber)
     if(displaynumber.includes(',')){
       displaynumber = displaynumber.split(',').join('')
     }
