@@ -7,7 +7,7 @@
 body {
   padding: 0;
   margin: 0;
-  background: linear-gradient(to right, #00AAFF, #00FF6C);
+  background: linear-gradient(to right, #00AAFF, rgb(73, 84, 182));
 }
 
 .calculator-grid {
@@ -39,7 +39,7 @@ body {
   grid-column: 1 / -1;
   background-color: rgba(0, 0, 0, .75);
   display: flex;
-  align-items: flex-end;
+  /* align-items: flex-end; */
   justify-content: space-around;
   flex-direction: column;
   padding: 10px;
@@ -50,9 +50,92 @@ body {
 .output .previous-operand {
   color: rgba(255, 255, 255, .75);
   font-size: 1.5rem;
+  /* border: 1px solid white; */
 }
 
 .output .current-operand {
   color: white;
   font-size: 2.5rem;
+  /* border: 1px solid white; */
+}
+
+.empty {
+  grid-column: 1 / -1;
+  /* background-color: rgba(0, 0, 0, .75); */
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 10px;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.reset-one {
+  grid-column: 1 / -1;
+  background-color: rgba(255, 255, 255, .66);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 10px;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.reset-one > button {
+  cursor: pointer;
+  font-size: 2rem;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.reset-one > button:hover {
+  background-color: rgba(255, 255, 255, .9);
+}
+
+.grid {
+  display: grid;
+  justify-content: center;
+  /* border: 1px solid white; */
+  /* align-content: center; */
+  /* min-height: 100vh; */
+  grid-template-columns: repeat(2, 400px);
+  /* grid-template-rows: minmax(120px, auto) repeat(5, 100px); */
+}
+
+.binary-grid {
+  display: grid;
+  /* border: 1px solid white; */
+  justify-content: center;
+  align-content: center;
+  min-height: 100vh;
+  /* max-height: 100vh; */
+  grid-template-columns: minmax(100px, auto) repeat(3, 100px);
+  grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+}
+
+.bit-group {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  /* min-height: vh; */
+  grid-template-columns: repeat(4, 22px);
+  border: 1px solid white;
+  background-color: rgba(255, 255, 255, .66);
+  /* grid-template-rows: minmax(10px, auto); */
+}
+
+.bit-group > button {
+  cursor: pointer;
+  font-size: 1rem;
+  /* border: 1px solid white; */
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.bit-group > button:hover {
+  background-color: rgba(255, 255, 255, .9);
 }

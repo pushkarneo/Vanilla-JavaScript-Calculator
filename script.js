@@ -2,6 +2,7 @@ class Calculator {
   constructor(previousOperandTextElement, currentOperandTextElement) {
     this.previousOperandTextElement = previousOperandTextElement
     this.currentOperandTextElement = currentOperandTextElement
+    this.bits = bits
     this.clear()
   }
 
@@ -9,6 +10,9 @@ class Calculator {
     this.currentOperand = ''
     this.previousOperand = ''
     this.operation = undefined
+    for (let i = 0; i < this.bits.length; i++) {
+      this.bits[i].innerText = '0';
+    }
   }
 
   delete() {
@@ -73,9 +77,68 @@ class Calculator {
     }
   }
 
+  resetOnes(){
+    for(let i = 0 ; i < 53;i++){
+      this.bits[this.bits.length - i - 1].innerText = '1'
+    }
+    // this.bits.forEach(function (e) {
+    //   e.innerText = '1';
+    // })
+    this.computeNumber()
+  }
+
+  updateBits(number) {
+    let intnumber = parseInt(number)
+    if (isNaN(intnumber)){
+      this.bits.forEach(function (e) {
+            e.innerText = '0';
+        })
+      return;
+    }
+    let i = this.bits.length
+    console.log(intnumber);
+    while(intnumber !== 0){
+      this.bits[i - 1].innerText = (intnumber % 2).toString();
+      console.log(intnumber)
+      intnumber = Math.floor(intnumber / 2);
+      i = i - 1;
+    }
+  }
+
+  computeNumber(){
+    let number = 0;
+    for(let i = this.bits.length - 1; i >= 0 ; i--){
+      number = number + parseInt(this.bits[i].innerText)*Math.pow(2,this.bits.length - i - 1);
+    }
+    console.log(number);
+    this.currentOperand = number.toString()
+  }
+
+  flipbit(i){
+    console.log(i);
+    let ithnumber = parseInt(this.bits[i].innerText);
+    console.log(ithnumber);
+    if(ithnumber === 1){
+      this.bits[i].innerText = '0';
+    } else {
+      this.bits[i].innerText = '1';
+    }
+    this.computeNumber();
+  }
+
+  updateCurrentOperand(){
+    let displaynumber = this.currentOperandTextElement.innerText
+    console.log(displaynumber)
+    if(displaynumber.includes(',')){
+      displaynumber = displaynumber.split(',').join('')
+    }
+    this.currentOperand = parseFloat(displaynumber)
+  }
+
   updateDisplay() {
     this.currentOperandTextElement.innerText =
       this.getDisplayNumber(this.currentOperand)
+    this.updateBits(this.currentOperand)
     if (this.operation != null) {
       this.previousOperandTextElement.innerText =
         `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
@@ -93,6 +156,8 @@ const deleteButton = document.querySelector('[data-delete]')
 const allClearButton = document.querySelector('[data-all-clear]')
 const previousOperandTextElement = document.querySelector('[data-previous-operand]')
 const currentOperandTextElement = document.querySelector('[data-current-operand]')
+const bits = document.querySelectorAll('[bit]')
+const resetOnes = document.querySelector('[reset-one]')
 
 const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
 
@@ -122,5 +187,22 @@ allClearButton.addEventListener('click', button => {
 
 deleteButton.addEventListener('click', button => {
   calculator.delete()
+  calculator.updateDisplay()
+})
+
+for(let i = 0; i < bits.length; i++){
+  bits[i].addEventListener('click', button => {
+    calculator.flipbit(i)
+    calculator.updateDisplay()
+  })
+}
+
+resetOnes.addEventListener('click', button => {
+  calculator.resetOnes()
+  calculator.updateDisplay()
+})
+
+currentOperandTextElement.addEventListener('input', Element => {
+  calculator.updateCurrentOperand()
   calculator.updateDisplay()
 })
