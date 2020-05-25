@@ -71,6 +71,19 @@ body {
   word-break: break-all;
 }
 
+.empty-label {
+  grid-column: 1 / -1;
+  /* background-color: rgba(0, 0, 0, .75); */
+  /* display: flex; */
+  /* align-items: flex-end; */
+  /* justify-content: space-around; */
+  /* flex-direction: column; */
+  font-size: 0.675rem;
+  padding: 5px;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
 .reset-one {
   grid-column: 1 / -1;
   background-color: rgba(255, 255, 255, .66);
@@ -124,7 +137,7 @@ body {
   grid-template-columns: repeat(4, 22px);
   border: 1px solid white;
   background-color: rgba(255, 255, 255, .66);
-  /* grid-template-rows: minmax(10px, auto); */
+  grid-template-rows: repeat(4, 22px);
 }
 
 .bit-group > button {
